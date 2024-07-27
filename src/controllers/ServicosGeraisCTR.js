@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const SGServer = axios.create({
-    baseURL: 'http://localhost:6004/'
+    baseURL: 'https://servicos-gerais-tg-9c39f2345a97.herokuapp.com/'
 })
+// 'http://localhost:6004/'
 
 const msgLife = 6000
 
