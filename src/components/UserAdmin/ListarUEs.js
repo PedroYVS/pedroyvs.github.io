@@ -56,7 +56,7 @@ export default class ListarUEs extends Component {
         if(!this.state.logado) return <Navigate to={this.state.destinoSaida}/>
         return (
             <div className='mt-4'>
-                <Messages id='mensagemListaUE' ref={(el) => this.mensagem = el}></Messages>
+                <Messages ref={(el) => this.mensagem = el}></Messages>
                 {
                     !this.state.msg &&
                     (this.state.listaUE.length === 0 ? <Loading/> : <InfosUEs lista={this.state.listaUE}/>)
@@ -69,7 +69,7 @@ export default class ListarUEs extends Component {
 class InfosUEs extends Component{
     render(){
         return(
-            <DataTable id='dataTableListaUE' value={this.props.lista}>
+            <DataTable value={this.props.lista}>
                 <Column field='razao_social' header='Razão Social'/>
                 <Column field='email_comercial' header='Email Comercial'/>
                 <Column field='cnpj' header='CNPJ'/>

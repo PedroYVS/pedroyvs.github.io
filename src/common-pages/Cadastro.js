@@ -36,19 +36,16 @@ export default class Cadastro extends Component {
             <div className='grid'>
                 <div className="col-2 p-4">
                     <Button
-                    id='botaoOpcaoUCCadastro'
                     className='border-round-lg block m-1'
                     label='Usuário Comum'
                     icon='pi pi-user'
                     onClick={this.escolherUC}/>
                     <Button
-                    id='botaoOpcaoUECadastro'
                     className='border-round-lg block m-1'
                     label='Empresa'
                     icon='pi pi-building'
                     onClick={this.escolherUE}/>
                     <Button
-                    id='botaoOpcaoUACadastro'
                     className='border-round-lg block m-1'
                     label='Admin'
                     icon='pi pi-file'

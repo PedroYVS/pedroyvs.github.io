@@ -16,6 +16,8 @@ import PesquisaEmpr from './components/UserEmpresarial/PesquisaEmpr'
 import PesquisaAdmin from './components/UserAdmin/PesquisaAdmin'
 import ListarUCs from './components/UserAdmin/ListarUCs'
 import ListarUEs from './components/UserAdmin/ListarUEs'
+import TestesProfAdmin from './components/UserAdmin/TestesProfAdmin'
+import SoftSkills from './components/UserAdmin/SoftSkills'
 import { useEffect } from 'react'
 
 function App() {
@@ -53,6 +55,8 @@ function App() {
                 <Route path='/pesquisaAdmin' element={<PesquisaAdmin/>}/>
                 <Route path='/listarUCs' element={<ListarUCs/>}/>
                 <Route path='/listarUEs' element={<ListarUEs/>}/>
+                <Route path='/testesprofadmin' element={<TestesProfAdmin/>}/>
+                <Route path='/softskills' element={<SoftSkills/>}/>
             </Routes>
         </div>
     );

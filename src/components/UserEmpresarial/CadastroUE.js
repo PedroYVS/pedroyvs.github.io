@@ -4,6 +4,7 @@ import { InputMask } from 'primereact/inputmask'
 import { Divider } from 'primereact/divider'
 import { Button } from 'primereact/button'
 import { Messages } from 'primereact/messages'
+import { Toast } from 'primereact/toast'
 import { cadastrarUE, validarCNPJ } from  '../../controllers/UserEmpresarialCTR'
 
 export default class CadastroUE extends Component {
@@ -52,7 +53,7 @@ export default class CadastroUE extends Component {
                     numeroContato: "",
                 }) 
             }
-            this.mensagens1.replace(response.pacote)
+            this.toast.replace(response.pacote)
         })
     }
 
@@ -72,7 +73,7 @@ export default class CadastroUE extends Component {
                         suplemento: estado.suplemento === "" ? response.pacote.complemento : estado.suplemento,
                     })
                 }
-                else this.mensagens2.replace(response.pacote)
+                else this.mensagem.replace(response.pacote)
             })
         }
     }
@@ -105,7 +106,7 @@ export default class CadastroUE extends Component {
                             onChange={e => this.setState({cnpj: e.target.value})}
                             required/>
                         </div>
-                        <Messages id='mensagensCNPJCadastroUE' ref={el => this.mensagens2 = el}></Messages>
+                        <Messages ref={el => this.mensagem = el}/>
                         <Divider align='left'>
                             <h4 style={{color: 'gray'}}>Informações da Conta:</h4>
                         </Divider>
@@ -222,7 +223,7 @@ export default class CadastroUE extends Component {
                         icon='pi pi-check'/>
                     </div>
                 </form>
-                <Messages id='mensagensGeraisCadastroUE' ref={el => this.mensagens1 = el}></Messages>
+                <Toast ref={el => this.toast = el} position='top-right'/>
             </div>
         )
     }

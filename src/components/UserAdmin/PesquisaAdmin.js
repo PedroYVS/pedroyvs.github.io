@@ -100,12 +100,10 @@ export default class PesquisaAdmin extends Component {
         <div className='grid'>
             <div className="col-2 p-4">
                 <Button
-                id='escolheTPUsuarioC'
                 className='border-round-lg block m-1'
                 label='Usuário Comum'
                 onClick={this.escolherTPUsuarioC}/>
                 <Button
-                id='escolheTPUsuarioE'
                 className='border-round-lg block m-1'
                 label='Empresa'
                 onClick={this.escolherTPUsuarioE}/>
@@ -118,19 +116,17 @@ export default class PesquisaAdmin extends Component {
                             <i className='pi pi-search'></i>
                         </span>
                         <InputText
-                        id='inputPesquisaAdmin'
                         placeholder={this.state.plholder}
                         value={this.state.termoPesquisa}
                         onChange={e => this.setState({ termoPesquisa: e.target.value })}></InputText>
                     </div>
                     <Button
-                    id='botaoPesquisaAdmin'
                     label='Pesquisar'
                     icon='pi pi-check'
                     onClick={this.pesquisar}
                     onKeyDown={e => { if(e.key === 'Enter') this.pesquisar() }}/>
                 </div>
-                <Messages id='mensagemPesquisaAdmin' ref={el => this.mensagem = el}></Messages>
+                <Messages ref={el => this.mensagem = el}></Messages>
                 <div>
                     {
                         !this.state.msg &&
@@ -187,7 +183,6 @@ class ResultadosUE extends Component{
                                     Razão Social:
                                 </span>
                                 <InputText
-                                id={`outputRazaoSocialPesquisaAdminUE${i}`}
                                 value={item.razao_social}
                                 disabled/>
                             </div>
@@ -196,7 +191,6 @@ class ResultadosUE extends Component{
                                     Email Comercial:
                                 </span>
                                 <InputText
-                                id={`outputEmailComercialPesquisaAdminUE${i}`}
                                 value={item.email_comercial}
                                 disabled/>
                             </div>
@@ -205,7 +199,6 @@ class ResultadosUE extends Component{
                                     CNPJ:
                                 </span>
                                 <InputText
-                                id={`outputCNPJPesquisaAdminUE${i}`}
                                 value={item.cnpj}
                                 disabled/>
                             </div>
@@ -214,7 +207,6 @@ class ResultadosUE extends Component{
                                     Número de Contato:
                                 </span>
                                 <InputText
-                                id={`outputNumeroContatoPesquisaAdminUE${i}`}
                                 value={item.numero_contato}
                                 disabled/>
                             </div>
@@ -224,7 +216,6 @@ class ResultadosUE extends Component{
                                         CEP:
                                     </span>
                                     <InputText
-                                    id={`outputCEPPesquisaAdminUE${i}`}
                                     value={item.cep}
                                     disabled/>
                                 </div>
@@ -233,7 +224,6 @@ class ResultadosUE extends Component{
                                         Município:
                                     </span>
                                     <InputText
-                                    id={`outputMunicipioPesquisaAdminUE${i}`}
                                     value={item.municipio}
                                     disabled/>
                                 </div>
@@ -242,7 +232,6 @@ class ResultadosUE extends Component{
                                         Bairro:
                                     </span>
                                     <InputText
-                                    id={`outputBairroPesquisaAdminUE${i}`}
                                     value={item.bairro}
                                     disabled/>
                                 </div>
@@ -251,7 +240,6 @@ class ResultadosUE extends Component{
                                         Logradouro:
                                     </span>
                                     <InputText
-                                    id={`outputLogradouroPesquisaAdminUE${i}`}
                                     value={item.logradouro}
                                     disabled/>
                                 </div>
@@ -260,7 +248,6 @@ class ResultadosUE extends Component{
                                         Suplemento:
                                     </span>
                                     <InputText
-                                    id={`outputSuplementoPesquisaAdminUE${i}`}
                                     value={item.suplemento}
                                     disabled/>
                                 </div>
@@ -310,7 +297,6 @@ class ResultadosUC extends Component{
                                     Email:
                                 </span>
                                 <InputText
-                                id={`outputEmailPesquisaAdminUC${i}`}
                                 value={item.email}
                                 disabled/>
                             </div>
@@ -319,7 +305,6 @@ class ResultadosUC extends Component{
                                     Nome Completo:
                                 </span>
                                 <InputText
-                                id={`outputNomeCompletoPesquisaAdminUC${i}`}
                                 value={item.nome_completo}
                                 disabled/>
                             </div>
@@ -328,7 +313,6 @@ class ResultadosUC extends Component{
                                     Ocupação:
                                 </span>
                                 <InputText
-                                id={`outputOcupacaoPesquisaAdminUC${i}`}
                                 value={item.ocupacao}
                                 disabled/>
                             </div>
@@ -337,7 +321,6 @@ class ResultadosUC extends Component{
                                     País de Origem:
                                 </span>
                                 <InputText
-                                id={`outputPaisOrigemPesquisaAdminUC${i}`}
                                 value={item.pais_origem}
                                 disabled/>
                             </div>

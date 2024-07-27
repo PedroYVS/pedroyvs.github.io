@@ -62,7 +62,7 @@ export default class ContaUC extends Component {
         if(!estado.logado) return <Navigate to={estado.destinoSaida}/>
         return (
             <div className='mr-5 ml-5'>
-                <Messages id='mensagemContaUC' ref={(el) => this.mensagem = el}></Messages>
+                <Messages ref={(el) => this.mensagem = el}/>
                 {
                     !this.state.msg &&
                     (this.state.email === "" ? <Loading/> : <InfoUC infos={estado}/>)

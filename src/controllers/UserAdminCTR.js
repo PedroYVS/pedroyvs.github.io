@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const UCServer = axios.create({
-    baseURL: 'https://user-admin-tg-7408f5404851.herokuapp.com/'
+    baseURL: 'http://localhost:6001/'
 })
-//'http://localhost:6001/'
+//'https://user-admin-tg-7408f5404851.herokuapp.com/'
 
 const msgLife = 6000
 
@@ -140,7 +140,7 @@ export const acessaInfoUA = async (token, tipoUsuario) => {
                         {
                             sucesso: false,
                             caso: 'erro',
-                            pacote: {severity: 'error', summary: 'Erro na Acessibilidade dos Dados', detail: err.response.data.message, life: msgLife,  sticky: true, closable: false}
+                            pacote: {severity: 'error', summary: 'Erro na Acessibilidade dos Dados', detail: err.response.data.message,  sticky: true, closable: false}
                         }
                     )   
         }
@@ -150,7 +150,7 @@ export const acessaInfoUA = async (token, tipoUsuario) => {
                 {
                     sucesso: false,
                     caso: 'erro',
-                    pacote: {severity: 'error', summary: 'Erro Inesperado', detail: 'Tente novamente mais tarde', life: msgLife,  sticky: true, closable: false}
+                    pacote: {severity: 'error', summary: 'Erro Inesperado', detail: 'Tente novamente mais tarde',  sticky: true, closable: false}
                 }
             )
         }  

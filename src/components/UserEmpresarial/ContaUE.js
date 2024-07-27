@@ -72,7 +72,7 @@ export default class ContaUE extends Component {
         if(!estado.logado) return <Navigate to={estado.destinoSaida}/>
         return (
             <div>
-                <Messages id='mensagemContaUE' ref={(el) => this.mensagem = el}></Messages>
+                <Messages ref={(el) => this.mensagem = el}/>
                 {
                     !this.state.msg &&
                     (estado.cnpj === "" ? <Loading/> : <InfoUE infos={estado}/>)

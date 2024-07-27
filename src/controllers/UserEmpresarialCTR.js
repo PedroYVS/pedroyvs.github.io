@@ -275,7 +275,7 @@ export const acessaInfoUE = async (token, tipoUsuario) => {
                         {
                             sucesso: false,
                             caso: 'erro',
-                            pacote: { severity: 'error', summary: 'Erro na Acessibilidade dos Dados', detail: err.response.data.message, life: msgLife }
+                            pacote: {severity: 'error', summary: 'Erro na Acessibilidade dos Dados', detail: err.response.data.message, sticky: true, closable: false}
                         }
                     )
             }
@@ -285,7 +285,7 @@ export const acessaInfoUE = async (token, tipoUsuario) => {
                 {
                     sucesso: false,
                     caso: 'erro',
-                    pacote: {severity: 'error', summary: 'Erro na Acessibilidade dos Dados', detail: 'Tente novamente mais tarde', life: msgLife,  sticky: true, closable: false}
+                    pacote: {severity: 'error', summary: 'Erro na Acessibilidade dos Dados', detail: 'Tente novamente mais tarde',  sticky: true, closable: false}
                 }
             )
         }
@@ -340,7 +340,7 @@ export const verTodosUE = async (token, tipoUsuario) => {
                         {
                             sucesso: false,
                             caso: 'erro',
-                            pacote: {severity: 'error', summary: err.response.data.messsage, detail: 'Tente novamente mais tarde', life: msgLife}
+                            pacote: {severity: 'error', summary: err.response.data.messsage, detail: 'Tente novamente mais tarde', sticky: true, closable: false}
                         }
                     )
                 default:
@@ -348,7 +348,7 @@ export const verTodosUE = async (token, tipoUsuario) => {
                         {
                             sucesso: false,
                             caso: 'erro',
-                            pacote: { severity: 'error', summary: 'Erro no Acesso à Lista de Usuários Empresariais', detail: err.response.data.message, life: msgLife }
+                            pacote: {severity: 'error', summary: 'Erro no Acesso à Lista de Usuários Empresariais', detail: err.response.data.message, sticky: true, closable: false}
                         }
                     )
             }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { InputText } from "primereact/inputtext"
 import { Button } from 'primereact/button'
-import { Messages } from 'primereact/messages'
+import { Toast } from 'primereact/toast'
 import { cadastrarUC } from  '../../controllers/UserComumCTR'
 
 export default class CadastroUC extends Component {
@@ -35,7 +35,7 @@ export default class CadastroUC extends Component {
                     paisOrigem: ""
                 }) 
             }
-            this.mensagem.replace(response.pacote)
+            this.toast.replace(response.pacote)
         })
     }
 
@@ -111,7 +111,7 @@ export default class CadastroUC extends Component {
                         icon='pi pi-check'/>
                     </div>
                 </form>
-                <Messages id='mensagensGeraisCadastroUC' ref={el => this.mensagem = el}></Messages>
+                <Toast ref={el => this.toast = el} position='top-right'/>
             </div>
         )
     }

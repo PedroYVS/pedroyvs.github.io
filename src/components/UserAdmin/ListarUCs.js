@@ -55,7 +55,7 @@ export default class ListarUCs extends Component {
         if(!this.state.logado) return <Navigate to={this.state.destinoSaida}/>
         return (
             <div className='mt-4'>
-                <Messages id='mensagemListaUC' ref={(el) => this.mensagem = el}></Messages>
+                <Messages ref={(el) => this.mensagem = el}/>
                 {
                     !this.state.msg &&
                     (this.state.listaUC.length === 0 ? <Loading/> : <InfosUCs lista={this.state.listaUC}/>)
@@ -68,7 +68,7 @@ export default class ListarUCs extends Component {
 class InfosUCs extends Component{
     render(){
         return(
-            <DataTable id='dataTableListaUC' value={this.props.lista}>
+            <DataTable value={this.props.lista}>
                 <Column field='nome_completo' header='Nome Completo'/>
                 <Column field='email' header='Email'/>
                 <Column field='ocupacao' header='Ocupação'/>

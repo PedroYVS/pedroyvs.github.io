@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'primereact/button'
-import { Messages } from 'primereact/messages'
+import { Toast } from 'primereact/toast'
 import { InputText } from 'primereact/inputtext'
 import { Navigate } from 'react-router-dom'
 import { loginUE } from '../controllers/UserEmpresarialCTR'
@@ -36,7 +36,7 @@ export default class Login extends Component {
                         console.log('Entrei no redirecionamento do UC')
                         this.setState({logadoUC: true})
                     } 
-                    else this.mensagem.replace(response.pacote)
+                    else this.toast.replace(response.pacote)
                 })
                 break
             case 'Empresarial':
@@ -45,7 +45,7 @@ export default class Login extends Component {
                         console.log('Entrei no redirecionamento do UE')
                         this.setState({logadoUE: true})
                     }
-                    else this.mensagem.replace(response.pacote)
+                    else this.toast.replace(response.pacote)
                 })
                 break
             case 'Admin':
@@ -54,7 +54,7 @@ export default class Login extends Component {
                         console.log('Entrei no redirecionamento do UA')
                         this.setState({logadoUA: true})
                     } 
-                    else this.mensagem.replace(response.pacote)
+                    else this.toast.replace(response.pacote)
                 })
                 break
             default:
@@ -63,17 +63,17 @@ export default class Login extends Component {
 
     escolherUC = () => {
         this.setState({usuario: this.tiposUsuario.Comum, cabecalho: "Entrando como Usuário Comum", emailComercial: "", senha: ""})
-        if(this.mensagem) this.mensagem.clear()
+        if(this.toast) this.toast.clear()
     }
 
     escolherUE = () => {
         this.setState({usuario: this.tiposUsuario.Empresarial, cabecalho: "Entrando como Usuário Empresarial", emailComercial: "", senha: ""})
-        if(this.mensagem) this.mensagem.clear()
+        if(this.toast) this.toast.clear()
     }
 
     escolherUA = () => {
         this.setState({usuario: this.tiposUsuario.Admin, cabecalho: "Entrando como Administrador", emailComercial: "", senha: ""})
-        if(this.mensagem) this.mensagem.clear()
+        if(this.toast) this.toast.clear()
     }
 
     render() {
@@ -84,19 +84,16 @@ export default class Login extends Component {
             <div className='grid'>
                 <div className='col-2 p-4'>
                     <Button
-                    id='botaoOpcaoUCLogin'
                     className='border-round-lg block m-1'
                     label='Usuário Comum'
                     icon='pi pi-user'
                     onClick={this.escolherUC}/>
                     <Button
-                    id='botaoOpcaoUELogin'
                     className='border-round-lg block m-1'
                     label='Empresa'
                     icon='pi pi-building'
                     onClick={this.escolherUE}/>
                     <Button
-                    id='botaoOpcaoUALogin'
                     className='border-round-lg block m-1'
                     label='Admin'
                     icon='pi pi-file'
@@ -114,7 +111,6 @@ export default class Login extends Component {
                                         <i className='pi pi-envelope'></i>
                                     </span>
                                     <InputText
-                                    id='emailInputLoginUE'
                                     type='email'
                                     value={this.state.emailComercial}
                                     onChange={e => this.setState({emailComercial: e.target.value})}
@@ -128,7 +124,6 @@ export default class Login extends Component {
                                         <i className='pi pi-lock'></i>
                                     </span>
                                     <InputText
-                                    id='senhaInputLoginUE'
                                     type='password'
                                     value={this.state.senha}
                                     onChange={e => this.setState({senha: e.target.value})}
@@ -136,13 +131,12 @@ export default class Login extends Component {
                                 </div>
                             </div>
                             <Button
-                            id='botaoEntrarLoginUE'
                             className='p-button-success mt-4'
                             label='Fazer Login'
                             icon='pi pi-check'
                             type='submit'/>
                         </form>
-                        <Messages id='mensagemLoginUE' ref={(el) => this.mensagem = el}></Messages>
+                        <Toast ref={(el) => this.toast = el} position='top-right'/>
                     </div>
                     } 
                 </div>   

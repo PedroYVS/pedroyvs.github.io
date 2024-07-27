@@ -25,7 +25,6 @@ export default class ContaUA extends Component {
             const { token, tipoUsuario } = JSON.parse(usuarioAdmin)
             acessaInfoUA(token, tipoUsuario).then(response => {
                 if(response.sucesso){
-                    console.log(response.pacote)
                     const dados = response.pacote
                     this.setState({
                         nomeAdmin: dados.nome_admin,
@@ -59,7 +58,7 @@ export default class ContaUA extends Component {
         if(!estado.logado) return <Navigate to={estado.destinoSaida}/>
         return (
             <div className='mr-5 ml-5'>
-                <Messages id='mensagemContaUA' ref={(el) => this.mensagem = el}></Messages>
+                <Messages ref={(el) => this.mensagem = el}/>
                 {
                     !this.state.msg &&
                     (this.state.emailAdmin === "" ? <Loading/> : <InfoUA infos={estado}/>)
@@ -85,7 +84,6 @@ class InfoUA extends Component{
                             Nome Completo:
                         </span>
                         <InputText
-                        id='outputNomeCompletoLoginUA'
                         value={infos.nomeAdmin}
                         disabled/>
                     </div>
@@ -94,7 +92,6 @@ class InfoUA extends Component{
                             Email Administrativo:
                         </span>
                         <InputText
-                        id='outputEmailAdminLoginUA'
                         value={infos.emailAdmin}
                         disabled/>
                     </div>
@@ -103,7 +100,6 @@ class InfoUA extends Component{
                             Cargo:
                         </span>
                         <InputText
-                        id='outputCargoLoginUA'
                         value={infos.cargo}
                         disabled/>
                     </div>

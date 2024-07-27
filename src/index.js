@@ -11,6 +11,8 @@ import PesquisaEmpr from './components/UserEmpresarial/PesquisaEmpr'
 import PesquisaAdmin from './components/UserAdmin/PesquisaAdmin'
 import ListarUCs from './components/UserAdmin/ListarUCs'
 import ListarUEs from './components/UserAdmin/ListarUEs'
+import TestesProfAdmin from './components/UserAdmin/TestesProfAdmin'
+import SoftSkills from './components/UserAdmin/SoftSkills'
 import reportWebVitals from './reportWebVitals'
 import { RouterProvider, createHashRouter } from 'react-router-dom'
 
@@ -26,7 +28,9 @@ const router = createHashRouter([{
     { path: '/pesquisaEmpr', element: <PesquisaEmpr /> },
     { path: '/pesquisaAdmin', element: <PesquisaAdmin /> },
     { path: '/listarUCs', element: <ListarUCs /> },
-    { path: '/listarUEs', element: <ListarUEs /> }
+    { path: '/listarUEs', element: <ListarUEs /> },
+    { path: '/testesprofadmin', element: <TestesProfAdmin /> },
+    { path: '/softskills', element: <SoftSkills /> }
   ]
 }]);
 

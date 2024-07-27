@@ -21,6 +21,12 @@ export default class Navbar extends Component {
                 <NavLink to='/pesquisaAdmin'>Consultar Usuários</NavLink>
               </li>
               <li>
+                <NavLink to='/softskills'>Soft Skills</NavLink>
+              </li>
+              <li>
+                <NavLink to='/testesprofadmin'>Testes</NavLink>
+              </li>
+              <li>
                 <NavLink to='/contaUA'>Conta</NavLink>
               </li>
             </ul>

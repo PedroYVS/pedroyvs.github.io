@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { InputText } from "primereact/inputtext"
 import { Button } from 'primereact/button'
-import { Messages } from 'primereact/messages'
+import { Toast } from 'primereact/toast'
 import { cadastrarUA } from  '../../controllers/UserAdminCTR'
 
 export default class CadastroUA extends Component {
@@ -36,7 +36,7 @@ export default class CadastroUA extends Component {
                     codigoValidacao: ""
                 }) 
             }
-            this.mensagem.replace(response.pacote)
+            this.toast.replace(response.pacote)
         })
     }
 
@@ -63,7 +63,7 @@ export default class CadastroUA extends Component {
                                 <i className='pi pi-envelope'></i>
                             </span>
                             <InputText
-                            id='emailAdminInputCadastroUA'
+                            id='emailInputCadastroUA'
                             type='email'
                             placeholder='Insira o um e-mail para a conta'
                             value={estado.emailAdmin}
@@ -99,7 +99,7 @@ export default class CadastroUA extends Component {
                                 <i className='pi pi-key'></i>
                             </span>
                             <InputText
-                            id='codigoValidacaoInputCadastroUE'
+                            id='codigoValidacaoInputCadastroUA'
                             type='password'
                             placeholder='Insira o código de validação'
                             value={estado.codigoValidacao}
@@ -107,14 +107,13 @@ export default class CadastroUA extends Component {
                             required/>
                         </div>
                         <Button
-                        id='submitButtonCadastroUA'
                         className='mt-5 w-min border-round-lg'
                         type='submit'
                         label='Cadastrar'
                         icon='pi pi-check'/>
                     </div>
                 </form>
-                <Messages id='mensagensGeraisCadastroUA' ref={el => this.mensagem = el}></Messages>
+                <Toast ref={el => this.toast = el} position='top-right'/>
             </div>
         )
     }
