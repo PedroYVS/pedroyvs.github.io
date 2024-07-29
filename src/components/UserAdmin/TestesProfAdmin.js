@@ -102,11 +102,10 @@ class ListarTesteP extends Component {
                     alert(response.pacote)
                     this.props.sairConta('/login')
                 }
-                else if (response.pacote.detail.toLowerCase().includes('nenhum')){
+                else{
                     this.mensagem.replace(response.pacote)
                     this.setState({msg: true})
                 }
-                else this.toast.replace(response.pacote)
             }
         })
     }

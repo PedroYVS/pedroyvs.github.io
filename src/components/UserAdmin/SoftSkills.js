@@ -141,7 +141,8 @@ class ListaSoftSkill extends Component {
         this.state = {
             softSkills: [],
             editarSS: false,
-            SSeditando: null
+            SSeditando: null,
+            msg: false
         }
     }
 
@@ -188,7 +189,10 @@ class ListaSoftSkill extends Component {
                 alert(pacote)
                 this.props.sairConta('/login')
             }
-            else this.mensagem.replace(pacote)
+            else{
+                this.mensagem.replace(pacote)
+                this.setState({msg: true})
+            }
         }
     }
 
@@ -233,7 +237,10 @@ class ListaSoftSkill extends Component {
         return (
         <div>
             <h1>Lista de Soft Skill</h1>
-            {estado.softSkills.length === 0 ? <Loading/> : estado.softSkills}
+            {
+                !estado.msg &&
+                estado.softSkills.length === 0 ? <Loading/> : estado.softSkills
+            }
             <Dialog header='Editar Soft Skill' visible={estado.editarSS} onHide={() => { if(!estado.editarSS) return; this.setState({editarSS: false})}}>
                 <div className='p-4'>
                     <div className='flex flex-column mb-3'>
