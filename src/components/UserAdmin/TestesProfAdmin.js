@@ -2,6 +2,7 @@ import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { Toast } from 'primereact/toast'
+import { Messages } from 'primereact/messages'
 import { ListBox } from 'primereact/listbox'
 import { Dialog } from 'primereact/dialog'
 import { Navigate } from 'react-router-dom'
@@ -75,7 +76,8 @@ class ListarTesteP extends Component {
         super(props)
         this.state = {
             testes: [],
-            accIndex: -1
+            accIndex: -1,
+            msg: false
         }
     }
 
@@ -100,6 +102,10 @@ class ListarTesteP extends Component {
                     alert(response.pacote)
                     this.props.sairConta('/login')
                 }
+                else if (response.pacote.detail.toLowerCase().includes('nenhum')){
+                    this.mensagem.replace(response.pacote)
+                    this.setState({msg: true})
+                }
                 else this.toast.replace(response.pacote)
             }
         })
@@ -118,12 +124,16 @@ class ListarTesteP extends Component {
         return (
         <div className='mr-3'>
             {
-                this.state.testes.length === 0 ? <Loading/> :
-                <Accordion activeIndex={this.state.accIndex >= 0 ? this.state.accIndex : null}>
-                    {this.state.testes}
-                </Accordion>
+                !this.state.msg &&
+                (
+                    this.state.testes.length === 0 ? <Loading/> :
+                    <Accordion activeIndex={this.state.accIndex >= 0 ? this.state.accIndex : null}>
+                        {this.state.testes}
+                    </Accordion>
+                )
             }
             <Toast ref={el => this.toast = el} position='top-right'/>
+            <Messages ref={(el) => this.mensagem = el}/>
         </div>
         )
     }
@@ -236,7 +246,7 @@ class ComponenteLista extends Component {
                                             Soft Skill Associada:
                                         </span>
                                         <InputText
-                                        value={q.nomeSoftSkill}
+                                        value={q.nomeSoftSkill ? q.nomeSoftSkill : 'Nenhuma Soft Skill Associada'}
                                         disabled/>
                                     </div>
                                     <h4>Alternativas</h4>
@@ -284,10 +294,9 @@ class ComponenteLista extends Component {
                         this.deletarTeste()
                     }}/>
                 </div>
-                <Dialog maximized header='Editando Teste de Proeficiência' visible={estado.editando} onHide={() => { if(!estado.editando) return; this.setState({editando: false})}}>
+                <Dialog maximized header='Editando Teste de Proficiência' visible={estado.editando} onHide={() => { if(!estado.editando) return; this.setState({editando: false})}}>
                     <MontaTesteP dadosTeste={estado} idCL={estado.idCL} refrescaPagina={this.refrescaPagina} fecharEdicao={this.fecharEdicao}/>
                 </Dialog>
-                <Toast ref={el => this.toast3 = el} position='top-right'/>
             </div>
         )
     }
@@ -333,7 +342,7 @@ class MontaTesteP extends Component {
     }
 
     transeferirDadosA = (alt) => {
-        console.log('Entrei em transeferirDadosA()')
+        // console.log('Entrei em transeferirDadosA()')
         const insercao = {
             idQuestao: alt.idQuestao,
             idAlternativa: alt.idAlternativa,
@@ -350,7 +359,7 @@ class MontaTesteP extends Component {
     }
 
     adicionarQuestao = () => {
-        console.log('Entrei em adicionarQuestao()')
+        // console.log('Entrei em adicionarQuestao()')
         const idQ = this.state.questsIDs + 1
         const questaoInsercao = {
             idQuestao: idQ,
@@ -358,28 +367,39 @@ class MontaTesteP extends Component {
             valorQ: 0,
             alternativaCorreta: 0,
         }
-        this.setState({questoes: [...this.state.questoes, questaoInsercao], contaComponents: this.state.contaComponents + 1, questsIDs: idQ})
+        this.setState({
+            questoes: [...this.state.questoes, questaoInsercao],
+            contaComponents: this.state.contaComponents + 1,
+            questsIDs: idQ
+        })
     }
 
     adicionarAlternativa = (idQ, idA) => {
-        console.log('Entrei em adicionarAlternativa()')
+        // console.log('Entrei em adicionarAlternativa()')
         const alternativaInsercao = {
             idQuestao: idQ,
             idAlternativa: idA,
             texto: ''
         }
-        this.setState({alternativas: [...this.state.alternativas, alternativaInsercao], contaComponents: this.state.contaComponents + 1})
+        this.setState({
+            alternativas: [...this.state.alternativas, alternativaInsercao],
+            contaComponents: this.state.contaComponents + 1
+        })
     }
 
     excluirQuestao = (idQ) => {
-        console.log('Entrei em excluirQuestao()')
+        // console.log('Entrei em excluirQuestao()')
         const novasQuestoes = this.state.questoes.filter(q => q.idQuestao !== idQ)
         const novasAlternativas = this.state.alternativas.filter(a => a.idQuestao !== idQ)
-        this.setState({questoes: novasQuestoes, alternativas: novasAlternativas, contaComponents: this.state.contaComponents - 1})
+        this.setState({
+            questoes: novasQuestoes,
+            alternativas: novasAlternativas,
+            contaComponents: this.state.contaComponents - 1
+        })
     }
 
     excluirAlternativa = (idQ, idA) => {
-        console.log('Entrei em excluirAlternativa()')
+        // console.log('Entrei em excluirAlternativa()')
         const novasAlternativas = this.state.alternativas.filter(a => a.idQuestao !== idQ || a.idAlternativa !== idA)
         const quests = this.state.questoes.map(q => q)
         for(let i = 0; i < quests.length; i++){
@@ -388,7 +408,11 @@ class MontaTesteP extends Component {
                 break
             }
         }
-        this.setState({alternativas: novasAlternativas, contaComponents: this.state.contaComponents - 1, questoes: quests})
+        this.setState({
+            alternativas: novasAlternativas,
+            contaComponents: this.state.contaComponents - 1,
+            questoes: quests
+        })
     }
 
     registarTP = async () => {
@@ -460,7 +484,7 @@ class MontaTesteP extends Component {
             .then(response => {
                 if(response.sucesso){
                     this.cancelar()
-                    this.toast2.replace('Teste de Proficiência registrado com sucesso')
+                    this.toast2.replace(response.pacote)
                 }
                 else{
                     if(response.caso === 'expirado'){
@@ -554,7 +578,7 @@ class MontaTesteP extends Component {
                         alert(response.pacote)
                         this.props.sairConta('/login')
                     }
-                    else this.toast2.replace(response.pacote)
+                    else this.props.refrescaPagina(response.pacote)
                 }
             })
         }
@@ -563,7 +587,7 @@ class MontaTesteP extends Component {
                 alert(pacote)
                 this.props.sairConta('/login')
             }
-            else this.toast2.replace(pacote)
+            else this.props.refrescaPagina(pacote)
         }
     }
 
@@ -714,7 +738,7 @@ class Questao extends Component {
     }
 
     montaQuestao = () => {
-        console.log('Entrei em montaQuestao()')
+        // console.log('Entrei em montaQuestao()')
         const dadosQ = this.props.dadosQuestao
         const dadosA = this.props.dadosAlternativas
         const alts = []

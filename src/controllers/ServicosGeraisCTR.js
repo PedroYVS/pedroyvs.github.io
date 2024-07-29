@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const SGServer = axios.create({
-    baseURL: 'https://servicos-gerais-tg-9c39f2345a97.herokuapp.com/'
+    baseURL: 'http://localhost:6004/'
 })
-// 'http://localhost:6004/'
+// 'https://servicos-gerais-tg-9c39f2345a97.herokuapp.com/'
 
 const msgLife = 6000
 
@@ -29,7 +29,7 @@ export const registrarSoftSkill = async (token, tipoUsuario, NSS, DSS, EmAdmin) 
         return(
             {
                 sucesso: true,
-                pacote: {severity: 'success', summary: 'Soft Skill registrada com sucesso', detail: 'A armazenagem da habilidade foi bem sucedida', life: msgLife}
+                pacote: {severity: 'success', summary: 'Soft Skill registrada com sucesso', life: msgLife}
             }
         )
     }
@@ -135,7 +135,7 @@ export const deletaSoftSkill = async (token, tipoUsuario, idSS) => {
         return(
             {
                 sucesso: true,
-                pacote: {severity: 'success', summary: 'Soft Skill deletada com sucesso', detail: 'A habilidade foi removida com sucesso', life: msgLife}
+                pacote: {severity: 'success', summary: 'Soft Skill deletada com sucesso', life: msgLife}
             }
         )
     }
@@ -193,7 +193,7 @@ export const editaSoftSkill = async (token, tipoUsuario, SS) => {
         return(
             {
                 sucesso: true,
-                pacote: {severity: 'success', summary: 'Soft Skill editada com sucesso', detail: 'A habilidade foi atualizada com sucesso', life: msgLife}
+                pacote: {severity: 'success', summary: 'Soft Skill editada com sucesso', life: msgLife}
             }
         )
     }
@@ -257,10 +257,10 @@ export const registrarTesteProficiencia = async (token, tipoUsuario, nomeTesteP,
     }
 
     try{
-        await SGServer.post('/registrar-teste-proeficiencia',
+        await SGServer.post('/registrar-teste-proficiencia',
             {
-                nome_teste_proeficiencia: nomeTesteP,
-                descricao_teste_proeficiencia: descricaoTesteP,
+                nome_teste_proficiencia: nomeTesteP,
+                descricao_teste_proficiencia: descricaoTesteP,
                 email_admin: emailAdmin,
                 questoes,
                 alternativas
@@ -277,7 +277,7 @@ export const registrarTesteProficiencia = async (token, tipoUsuario, nomeTesteP,
         return(
             {
                 sucesso: true,
-                pacote: {severity: 'success', summary: 'Teste de Proficiência registrado com sucesso', detail: 'O teste foi armazenado com sucesso', life: msgLife}
+                pacote: {severity: 'success', summary: 'Teste de Proficiência registrado com sucesso', life: msgLife}
             }
         )
     }
@@ -318,7 +318,7 @@ export const registrarTesteProficiencia = async (token, tipoUsuario, nomeTesteP,
 export const acessaListaTestesProficiencia = async (token, tipoUsuario) => {
     console.log('Entrei na função acessaListaTestesProficiencia() em ServicosGeraisCTR')
     try{
-        const { data } = await SGServer.get('/listar-testes-proeficiencia', {
+        const { data } = await SGServer.get('/listar-testes-proficiencia', {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -331,7 +331,7 @@ export const acessaListaTestesProficiencia = async (token, tipoUsuario) => {
         for(let i = 0; i < data.testes.length; i++){
             const questoes = []
             for(let j = 0; j < data.questoes.length; j++){
-                if(data.questoes[j].id_teste_proeficiencia === data.testes[i].id_teste_proeficiencia){
+                if(data.questoes[j].id_teste_proficiencia === data.testes[i].id_teste_proficiencia){
                     const q = {
                         idQuestao: data.questoes[j].id_questao,
                         enunciado: data.questoes[j].enunciado_questao,
@@ -345,7 +345,7 @@ export const acessaListaTestesProficiencia = async (token, tipoUsuario) => {
             }
             const alternativas = []
             for(let j = 0; j < data.alternativas.length; j++){
-                if(data.alternativas[j].id_teste_proeficiencia === data.testes[i].id_teste_proeficiencia){
+                if(data.alternativas[j].id_teste_proficiencia === data.testes[i].id_teste_proficiencia){
                     const a = {
                         idQuestao: data.alternativas[j].id_questao,
                         idAlternativa: data.alternativas[j].id_alternativa,
@@ -355,9 +355,9 @@ export const acessaListaTestesProficiencia = async (token, tipoUsuario) => {
                 }
             }
             const test = {
-                idTeste: data.testes[i].id_teste_proeficiencia,
-                nomeTeste: data.testes[i].nome_teste_proeficiencia,
-                descricaoTeste: data.testes[i].descricao_teste_proeficiencia,
+                idTeste: data.testes[i].id_teste_proficiencia,
+                nomeTeste: data.testes[i].nome_teste_proficiencia,
+                descricaoTeste: data.testes[i].descricao_teste_proficiencia,
                 questoes,
                 alternativas
             }
@@ -410,19 +410,19 @@ export const deletaTesteProficiencia = async (token, tipoUsuario, idTesteP) => {
     console.log('Entrei na função deletaTesteProficiencia() em ServicosGeraisCTR')
     console.log(`Dados importantes => Token: ${token}, Tipo de Usuário: ${tipoUsuario}, ID do Teste de Proficiência: ${idTesteP}`)
     try{
-        await SGServer.delete('/deletar-teste-proeficiencia', {
+        await SGServer.delete('/deletar-teste-proficiencia', {
             headers: {
                 Authorization: `Bearer ${token}`
             },
             params: {
                 tipoUsuario,
-                id_teste_proeficiencia: idTesteP
+                id_teste_proficiencia: idTesteP
             }
         })
         return(
             {
                 sucesso: true,
-                pacote: {severity: 'success', summary: 'Teste de Proficiência deletado com sucesso', detail: 'O teste foi removido com sucesso', life: msgLife}
+                pacote: {severity: 'success', summary: 'Teste de Proficiência deletado com sucesso', life: msgLife}
             }
         )
     }
@@ -486,11 +486,11 @@ export const editaTesteProficiencia = async (token, tipoUsuario, idTeste, nomeTe
     }
 
     try{
-        await SGServer.put('/editar-teste-proeficiencia',
+        await SGServer.put('/editar-teste-proficiencia',
             {
-                id_teste_proeficiencia: idTeste,
-                nome_teste_proeficiencia: nomeTeste,
-                descricao_teste_proeficiencia: descricaoTeste,
+                id_teste_proficiencia: idTeste,
+                nome_teste_proficiencia: nomeTeste,
+                descricao_teste_proficiencia: descricaoTeste,
                 email_admin: emailAdmin,
                 questoes,
                 alternativas
@@ -501,14 +501,14 @@ export const editaTesteProficiencia = async (token, tipoUsuario, idTeste, nomeTe
                 },
                 params: {
                     tipoUsuario,
-                    id_teste_proeficiencia: idTeste
+                    id_teste_proficiencia: idTeste
                 }
             }
         )
         return(
             {
                 sucesso: true,
-                pacote: {severity: 'success', summary: 'Teste de Proficiência editado com sucesso', detail: 'O teste foi atualizado com sucesso', life: msgLife}
+                pacote: {severity: 'success', summary: 'Teste de Proficiência editado com sucesso', detail: 'Talvez seja preciso reabrir a aba do teste para ver as alterações', life: msgLife}
             }
         )
     }
